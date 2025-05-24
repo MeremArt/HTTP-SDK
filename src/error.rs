@@ -1,4 +1,4 @@
-// src/error.rs
+
 use reqwest::StatusCode;
 use thiserror::Error;
 
