@@ -1,6 +1,20 @@
 [package]
 name = "rusty_http_client"
 version = "0.1.0"
-edition = "2024"
+edition = "2021"
+authors = ["Ugo Chinemerem <Ugofranklin22@gmail.com>"]
+description = "A lightweight Rust SDK wrapping around reqwest"
+license = "MIT"
 
 [dependencies]
+reqwest = { version = "0.11", features = ["json", "cookies"] } #HTTP client library
+serde = { version = "1.0", features = ["derive"] } #Serialization/deserialization framework
+serde_json = "1.0" #JSON serialization/deserialization
+thiserror = "1.0" #Provides a simple way to define custom error types
+tokio = { version = "1.0", features = ["full"] } #Asynchronous runtime for Rust
+url = "2.3" #Provides safe, parseable, mutable URLs
+
+[dev-dependencies]
+tokio-test = "0.4"
+mockito = "1.0"
+async-std = { version = "1.12", features = ["attributes"] }
