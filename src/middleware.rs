@@ -97,6 +97,17 @@ impl Middleware for AuthMiddleware {
         // Auth middleware doesn't need to process responses
         Ok(())
     }
+
+    // async fn process_response(&self, response: &mut Response) -> Result<()> {
+    //     println!(
+    //         "[{}] Response status: {}",
+    //         self.name(),
+    //         response.status()
+    //     );
+    
+    //     Ok(())
+    // }
+    
     
     fn name(&self) -> &'static str {
         "AuthMiddleware"
