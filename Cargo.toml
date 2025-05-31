@@ -3,8 +3,12 @@ name = "rusty_http_client"
 version = "0.1.0"
 edition = "2021"
 authors = ["Ugo Chinemerem <Ugofranklin22@gmail.com>"]
-description = "A lightweight Rust SDK wrapping around reqwest"
+description = "A lightweight Rust SDK that wraps around reqwest to simplify making HTTP requests"
 license = "MIT"
+repository = "https://github.com/meremart/aqua_http_client"
+keywords = ["http", "client", "reqwest", "wrapper", "api"]
+categories = ["api-bindings", "web-programming::http-client"]
+readme = "README.md"
 
 [dependencies]
 reqwest = { version = "0.11", features = ["json", "cookies"] } #HTTP client library
@@ -13,8 +17,43 @@ serde_json = "1.0" #JSON serialization/deserialization
 thiserror = "1.0" #Provides a simple way to define custom error types
 tokio = { version = "1.0", features = ["full"] } #Asynchronous runtime for Rust
 url = "2.3" #Provides safe, parseable, mutable URLs
+urlencoding = "2.1" #URL encoding/decoding library
+async-trait = "0.1" #Allows async functions in traits
+log = "0.4"# Logging framework for Rust
+futures = "0.3" #Provides utilities for asynchronous programming
+reqwest-blocking = { package = "reqwest", version = "0.11", features = ["blocking", "json", "cookies", "multipart"], optional = true }
 
 [dev-dependencies]
 tokio-test = "0.4"
 mockito = "1.0"
 async-std = { version = "1.12", features = ["attributes"] }
+env_logger = "0.10"
+
+
+[features]
+default = ["async"]
+async = []
+blocking = ["reqwest-blocking"]
+middleware = []
+full = ["async", "blocking", "middleware"]
+
+[[example]]
+name = "basic_usage"
+path = "examples/basic_usage.rs"
+
+[[example]]
+name = "middleware_example"
+path = "examples/middleware_example.rs"
+
+[[example]]
+name = "blocking_example"
+path = "examples/blocking_example.rs"
+required-features = ["blocking"]
+
+[[example]]
+name = "advanced_usage"
+path = "examples/advanced_usage.rs"
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]
