@@ -1,6 +1,6 @@
 # AQUA HTTP Client
 
-A lightweight, ergonomic Rust SDK that wraps around `reqwest` to simplify HTTP requests. Designed as a "no-BS layer" that provides just enough abstraction to make common HTTP tasks easier without hiding the underlying power.
+A lightweight,  Rust SDK that wraps around `reqwest` to simplify HTTP requests. Designed as a "no-BS layer" that provides just enough abstraction to make common HTTP tasks easier without hiding the underlying power.
 
 ## 🚀 Features
 
