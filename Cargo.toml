@@ -2,7 +2,7 @@
 name = "rusty_http_client"
 version = "0.1.0"
 edition = "2021"
-authors = ["Your Name <your.email@example.com>"]
+authors = ["Ugo Chinemerem Franklin <ugofranklin22@gmail.com>"]
 description = "A lightweight Rust SDK that wraps around reqwest to simplify making HTTP requests"
 license = "MIT"
 repository = "https://github.com/yourusername/rusty_http_client"
@@ -20,6 +20,7 @@ url = "2.3"
 urlencoding = "2.1"
 async-trait = "0.1"
 log = "0.4"
+futures = "0.3"
 
 [dev-dependencies]
 tokio-test = "0.4"
@@ -45,6 +46,3 @@ name = "blocking_example"
 path = "examples/blocking_example.rs"
 required-features = ["blocking"]
 
-[[example]]
-name = "advanced_usage"
-path = "examples/advanced_usage.rs"

@@ -259,7 +259,7 @@ async fn demonstrate_advanced_patterns() -> Result<()> {
         processor(response)
     }
     
-    let processed_result = process_response(&client, "https://httpbin.org/json", |response| {
+    let processed_result = process_response::<(), _, String>(&client, "https://httpbin.org/json", |response| {
         // Custom processing logic
         let status = response.status();
         if status.is_success() {
