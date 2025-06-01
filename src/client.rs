@@ -111,12 +111,12 @@ impl fmt::Debug for HttpClient {
             .finish()
     }
 }
-
+//custom HTTP client abstraction 
 impl HttpClient {
     /// Create a new HTTP client with default settings
     pub fn new() -> Self {
         let config = ClientConfig::default(); //creates a config with all the default values.
-        let client = Self::build_reqwest_client(&config)?;
+        let client = Self::build_reqwest_client(&config).unwrap();
         
         Self {
             client,
@@ -127,7 +127,7 @@ impl HttpClient {
     
     /// Create a new HTTP client with custom configuration
     pub fn with_config(config: ClientConfig) -> Result<Self> {
-        
+
         let client = Self::build_reqwest_client(&config)?;
         
         Ok(Self {
@@ -142,7 +142,7 @@ impl HttpClient {
         let config = ClientConfig::default().with_base_url(base_url);
         Self::with_config(config).unwrap()
     }
-    
+
     /// Add middleware to the client
     pub fn with_middleware<M: Middleware + 'static>(mut self, middleware: M) -> Self {
         self.middlewares.push(Arc::new(middleware));

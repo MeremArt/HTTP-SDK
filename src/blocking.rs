@@ -398,7 +398,9 @@ impl BlockingHttpClient {
         
         if status.is_success() {
             std::io::copy(&mut response, &mut writer)
-                .map_err(|e| HttpError::RequestError(reqwest::Error::from(e)))
+            .map_err(|e| HttpError::RequestError(reqwest::Error::new(reqwest::ErrorKind::Body, e)))
+
+
         } else {
             let body = response
                 .text()

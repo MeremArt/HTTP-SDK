@@ -11,7 +11,9 @@ categories = ["api-bindings", "web-programming::http-client"]
 readme = "README.md"
 
 [dependencies]
-reqwest = { version = "0.11", features = ["json", "cookies"] } #HTTP client library
+
+reqwest = { version = "0.11", features = ["json", "cookies", "blocking", "multipart"], optional = false }
+ #HTTP client library
 serde = { version = "1.0", features = ["derive"] } #Serialization/deserialization framework
 serde_json = "1.0" #JSON serialization/deserialization
 thiserror = "1.0" #Provides a simple way to define custom error types
@@ -21,7 +23,7 @@ urlencoding = "2.1" #URL encoding/decoding library
 async-trait = "0.1" #Allows async functions in traits
 log = "0.4"# Logging framework for Rust
 futures = "0.3" #Provides utilities for asynchronous programming
-reqwest-blocking = { package = "reqwest", version = "0.11", features = ["blocking", "json", "cookies", "multipart"], optional = true }
+
 
 [dev-dependencies]
 tokio-test = "0.4"
@@ -33,7 +35,7 @@ env_logger = "0.10"
 [features]
 default = ["async"]
 async = []
-blocking = ["reqwest-blocking"]
+blocking = ["reqwest/blocking", "reqwest/multipart"]
 middleware = []
 full = ["async", "blocking", "middleware"]
 
@@ -52,7 +54,7 @@ required-features = ["blocking"]
 
 [[example]]
 name = "advanced_usage"
-path = "examples/advanced_usage.rs"
+path = "/examples/advanced_usage.rs"
 
 [package.metadata.docs.rs]
 all-features = true
