@@ -1,11 +1,17 @@
 
+// Blocking (synchronous) HTTP client implementation
+
+// This module provides a blocking version of the HTTP client for use cases
+// where async/await is not suitable or available.
 
 use crate::error::{HttpError, Result};
 use reqwest::blocking::{Client, RequestBuilder, Response};
 use reqwest::{
     header::{HeaderMap, HeaderName, HeaderValue},
-    Method, StatusCode,
+    Method,
 };
+
+
 use serde::{de::DeserializeOwned, Serialize};
 use std::{collections::HashMap, fmt, time::Duration};
 
@@ -94,6 +100,7 @@ impl BlockingClientConfig {
 }
 
 /// Blocking HTTP client struct
+#[derive(Clone)]
 pub struct BlockingHttpClient {
     client: Client,
     config: BlockingClientConfig,
@@ -398,9 +405,7 @@ impl BlockingHttpClient {
         
         if status.is_success() {
             std::io::copy(&mut response, &mut writer)
-            .map_err(|e| HttpError::RequestError(reqwest::Error::new(reqwest::ErrorKind::Body, e)))
-
-
+            .map_err(|e| HttpError::IoError(e.to_string()))
         } else {
             let body = response
                 .text()
@@ -454,7 +459,7 @@ mod tests {
     #[test]
     fn test_blocking_client_creation() {
         let client = BlockingHttpClient::new();
-        assert!(client.config.timeout.is_some());
+        assert!(client.config().timeout.is_some());
     }
     
     #[test]

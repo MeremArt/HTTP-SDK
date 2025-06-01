@@ -17,7 +17,7 @@ struct User {
     id: u64,
     name: String,
     email: String,
-    created_at: String,
+    _created_at: String,
 }
 
 async fn run_middleware_example() -> Result<()> {
@@ -82,7 +82,7 @@ async fn run_middleware_example() -> Result<()> {
 
     // Example 4: Custom headers middleware
     println!("\n4. Custom headers example:");
-    let custom_client = HttpClient::new()
+    let _custom_client = HttpClient::new()
         .with_middleware(
             HeaderMiddleware::new()
                 .with_header("User-Agent", "RustyHttpClient/1.0")
@@ -100,17 +100,17 @@ async fn demonstrate_auth_types() -> Result<()> {
     println!("\n=== Authentication Middleware Types ===");
 
     // Bearer token authentication
-    let bearer_client = HttpClient::new()
+    let _bearer_client = HttpClient::new()
         .with_middleware(AuthMiddleware::bearer("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."));
     println!("1. Bearer token auth configured");
 
     // Basic authentication
-    let basic_client = HttpClient::new()
+    let _basic_client = HttpClient::new()
         .with_middleware(AuthMiddleware::basic("dXNlcjpwYXNzd29yZA=="));
     println!("2. Basic auth configured");
 
     // API key authentication
-    let api_key_client = HttpClient::new()
+    let _api_key_client = HttpClient::new()
         .with_middleware(AuthMiddleware::api_key("X-RapidAPI-Key", "your-rapidapi-key"));
     println!("3. API key auth configured");
 
@@ -121,17 +121,17 @@ async fn demonstrate_logging_options() -> Result<()> {
     println!("\n=== Logging Middleware Options ===");
 
     // Log everything
-    let full_logging_client = HttpClient::new()
+    let _full_logging_client = HttpClient::new()
         .with_middleware(LoggingMiddleware::new());
     println!("1. Full logging (requests + responses)");
 
     // Log only requests
-    let request_logging_client = HttpClient::new()
+    let _request_logging_client = HttpClient::new()
         .with_middleware(LoggingMiddleware::requests_only());
     println!("2. Request-only logging");
 
     // Log only responses
-    let response_logging_client = HttpClient::new()
+    let _response_logging_client = HttpClient::new()
         .with_middleware(LoggingMiddleware::responses_only());
     println!("3. Response-only logging");
 

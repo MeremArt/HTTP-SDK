@@ -34,6 +34,16 @@ pub enum HttpError {
     
     #[error("Middleware error: {0}")]
     MiddlewareError(String),
+
+    #[error("IO error: {0}")]
+    IoError(String),
+
+    #[error("Unknown error: {0}")]
+Unknown(String),
+
+
+
+  
 }
 
 /// Result type alias to simplify return types

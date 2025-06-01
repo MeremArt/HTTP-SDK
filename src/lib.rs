@@ -1,3 +1,5 @@
+// src/lib.rs
+
 
 // Re-export essential types from reqwest for convenience
 pub use reqwest::{Method, StatusCode, Url};
@@ -11,6 +13,9 @@ pub mod middleware;
 #[cfg(feature = "blocking")]
 pub mod blocking;
 
+// Utility functions and builders
+pub mod utils;
+
 // Public exports
 pub use client::{ClientConfig, HttpClient, RequestBuilderExt};
 pub use error::{HttpError, Result};
@@ -21,10 +26,6 @@ pub use middleware::{
 
 #[cfg(feature = "blocking")]
 pub use blocking::{BlockingClientConfig, BlockingHttpClient, BlockingRequestBuilderExt};
-
-// Utility functions and builders
-pub mod utils;
-pub use utils::*;
 
 // Re-export common serialization traits
 pub use serde::{Deserialize, Serialize};
@@ -99,5 +100,12 @@ mod tests {
     fn test_blocking_client_creation() {
         let client = new_blocking_client();
         assert!(client.config().timeout.is_some());
+    }
+    
+    #[tokio::test]
+    async fn test_async_client_simple_usage() {
+        let client = HttpClient::new();
+        // This just tests that the client can be created
+        assert_eq!(client.middleware_count(), 0);
     }
 }

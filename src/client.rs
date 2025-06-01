@@ -1,12 +1,14 @@
+
 use crate::error::{HttpError, Result};
 use crate::middleware::Middleware;
 use reqwest::{
     header::{HeaderMap, HeaderName, HeaderValue},
-    Client, Method, RequestBuilder, Response, StatusCode,
+    Client, Method, RequestBuilder, Response,
 };
-use serde::{de::DeserializeOwned, Serialize}; //with full type ownership (no borrowing).
+use serde::{de::DeserializeOwned, Serialize};
 use std::{collections::HashMap, fmt, sync::Arc, time::Duration};
 
+/// Configuration for the HTTP client
 #[derive(Debug, Clone)]
 pub struct ClientConfig {
     pub base_url: Option<String>,
@@ -33,7 +35,7 @@ impl Default for ClientConfig {
         }
     }
 }
-//create chainable methods for ClientConfig
+
 impl ClientConfig {
     /// Create a new client configuration
     pub fn new() -> Self {
@@ -90,17 +92,12 @@ impl ClientConfig {
     }
 }
 
+/// Main HTTP client struct
+#[derive(Clone)]
 pub struct HttpClient {
     client: Client,
     config: ClientConfig,
     middlewares: Vec<Arc<dyn Middleware>>,
-}
-
-
-impl Default for HttpClient {
-    fn default() -> Self {
-        Self::new()
-    }
 }
 
 impl fmt::Debug for HttpClient {
@@ -111,11 +108,17 @@ impl fmt::Debug for HttpClient {
             .finish()
     }
 }
-//custom HTTP client abstraction 
+
+impl Default for HttpClient {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl HttpClient {
     /// Create a new HTTP client with default settings
     pub fn new() -> Self {
-        let config = ClientConfig::default(); //creates a config with all the default values.
+        let config = ClientConfig::default();
         let client = Self::build_reqwest_client(&config).unwrap();
         
         Self {
@@ -127,7 +130,6 @@ impl HttpClient {
     
     /// Create a new HTTP client with custom configuration
     pub fn with_config(config: ClientConfig) -> Result<Self> {
-
         let client = Self::build_reqwest_client(&config)?;
         
         Ok(Self {
@@ -142,7 +144,7 @@ impl HttpClient {
         let config = ClientConfig::default().with_base_url(base_url);
         Self::with_config(config).unwrap()
     }
-
+    
     /// Add middleware to the client
     pub fn with_middleware<M: Middleware + 'static>(mut self, middleware: M) -> Self {
         self.middlewares.push(Arc::new(middleware));
@@ -374,6 +376,9 @@ pub trait RequestBuilderExt {
 }
 
 impl RequestBuilderExt for RequestBuilder {
+    //If my_params is { search: "cats" }, it turns https://api.com/items into: https://api.com/items?search=cats
+
+
     fn with_query<T: Serialize>(self, params: &T) -> RequestBuilder {
         self.query(params)
     }
