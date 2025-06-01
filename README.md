@@ -66,6 +66,8 @@ async fn main() -> Result<()> {
     Ok(())
 }
 ```
+![ChatGPT Image Jun 1, 2025, 02_31_44 PM](https://github.com/user-attachments/assets/bea66227-56d1-4ba9-92ae-d55ec1c4d8dd)
+
 
 ### Using Middleware
 
