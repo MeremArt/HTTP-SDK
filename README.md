@@ -1,6 +1,18 @@
 # AQUA HTTP Client
 
+![ChatGPT Image Jun 1, 2025, 03_07_13 PM](https://github.com/user-attachments/assets/36d42a78-1f18-4a49-9001-9710a40c04ce)
+
+
+
 A lightweight,  Rust SDK that wraps around `reqwest` to simplify HTTP requests. Designed as a "no-BS layer" that provides just enough abstraction to make common HTTP tasks easier without hiding the underlying power.
+
+Why Build This Instead of Using reqwest Directly?
+
+Because this:
+✅ Centralizes all configs (timeouts, headers)
+✅ Gives you reusable middlewares
+✅ Simplifies calling patterns (no need to manually build requests everywhere)
+✅ Handles repetitive stuff like base URLs and JSON handling for you
 
 ## 🚀 Features
 
@@ -66,6 +78,8 @@ async fn main() -> Result<()> {
     Ok(())
 }
 ```
+![ChatGPT Image Jun 1, 2025, 02_31_44 PM](https://github.com/user-attachments/assets/bea66227-56d1-4ba9-92ae-d55ec1c4d8dd)
+
 
 ### Using Middleware
 
