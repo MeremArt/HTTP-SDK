@@ -311,7 +311,12 @@ println!("Created: {}", created_user.name);
 
 ## 🧪 Testing
 
+<img width="1440" alt="Screenshot 2025-06-02 at 14 20 37" src="https://github.com/user-attachments/assets/10c5eefc-30a4-49eb-bdae-fced838cdcc0" />
+
+
+
 Run the test suite:
+
 
 ```bash
 # Run all tests
